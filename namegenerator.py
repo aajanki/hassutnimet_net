@@ -10,9 +10,10 @@ word_end = '$'
 
 
 class Markov(object):
-    def __init__(self, n, statistics):
+    def __init__(self, n, statistics, forbidden):
         self.n = n
         self.statistics = statistics
+        self.forbidden = forbidden
 
 
 def ngrams(n, word):
@@ -46,7 +47,7 @@ def collect_statistics(rows, n):
     for prefix, values in samples.items():
         markov_weights[prefix] = tuple(unzip(values.items()))
         
-    return Markov(n, markov_weights)
+    return Markov(n, markov_weights, set(names))
 
 
 def markov_sample(markov):
@@ -64,13 +65,19 @@ def markov_sample(markov):
         
     return ''.join(sample)
 
+def markov_sample_forbidden(markov):
+    while True:
+        sample = markov_sample(markov)
+        if sample not in markov.forbidden:
+            return sample
+
 
 def sample_name(first_chain, last_chain):
     num_first_names = random.choices([1, 2, 3], cum_weights=[60, 90, 100])[0]
     names = []
     for _ in range(num_first_names):
-        names.append(markov_sample(first_chain))
-    names.append(markov_sample(last_chain))
+        names.append(markov_sample_forbidden(first_chain))
+    names.append(markov_sample_forbidden(last_chain))
     return ' '.join(names)
 
 
