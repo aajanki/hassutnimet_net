@@ -3,7 +3,6 @@
 
 import csv
 import random
-import sys
 
 
 word_start = '^'
@@ -66,6 +65,10 @@ def markov_sample(markov):
     return ''.join(sample)
 
 
+def sample_name(first_chain, last_chain):
+    return markov_sample(first_chain) + ' ' + markov_sample(last_chain)
+
+
 def read_data(csvfilename):
     with open(csvfilename, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -74,10 +77,13 @@ def read_data(csvfilename):
 
 
 def main():
-    markov = collect_statistics(read_data(sys.argv[1]), 4)
+    male_chain = collect_statistics(read_data('data/first-names-male.csv'), 4)
+    female_chain = collect_statistics(read_data('data/first-names-female.csv'), 4)
+    last_chain = collect_statistics(read_data('data/last-names.csv'), 4)
 
-    for _ in range(20):
-        print(markov_sample(markov))
+    for i in range(20):
+        first_chain = male_chain if i % 2 == 0 else female_chain
+        print(sample_name(first_chain, last_chain))
 
 
 if __name__ == '__main__':
