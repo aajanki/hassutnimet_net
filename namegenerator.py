@@ -30,7 +30,7 @@ def collect_statistics(rows, n):
     names = []
     samples = {}
     for row in rows:
-        word = row['Name'].lower()
+        word = row['Name']
         names.append(word)
         count = int(float(row['Count']))
         prepared_word = word_prefix + word + word_end
@@ -77,8 +77,8 @@ def read_data(csvfilename):
 
 
 def main():
-    male_chain = collect_statistics(read_data('data/first-names-male.csv'), 4)
-    female_chain = collect_statistics(read_data('data/first-names-female.csv'), 4)
+    male_chain = collect_statistics(read_data('data/first-names-male.csv'), 3)
+    female_chain = collect_statistics(read_data('data/first-names-female.csv'), 3)
     last_chain = collect_statistics(read_data('data/last-names.csv'), 4)
 
     for i in range(20):
