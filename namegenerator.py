@@ -66,7 +66,12 @@ def markov_sample(markov):
 
 
 def sample_name(first_chain, last_chain):
-    return markov_sample(first_chain) + ' ' + markov_sample(last_chain)
+    num_first_names = random.choices([1, 2, 3], cum_weights=[60, 90, 100])[0]
+    names = []
+    for _ in range(num_first_names):
+        names.append(markov_sample(first_chain))
+    names.append(markov_sample(last_chain))
+    return ' '.join(names)
 
 
 def read_data(csvfilename):
