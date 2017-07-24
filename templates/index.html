@@ -21,12 +21,27 @@
       #refresh-btn {
           font-size: 16px;
       }
+      #footer {
+          text-align: center;
+      }
+      #footer a {
+          margin: 0 auto;
+          color: #ffffff;
+          font-size: small;
+          text-decoration: none;
+      }
+      #footer a:hover {
+          text-decoration: underline;
+      }
     </style>
 </head>
 <body>
   <div id="main">
     <p id="name">{{ name }}</p>
     <p><button id="refresh-btn" onclick="window.location.reload(true);">Uusi nimiehdotus</button></p>
+  </div>
+  <div id="footer">
+    <a href="mailto:antti.ajanki@iki.fi">Palaute</a>
   </div>
 </body>
 </html>
