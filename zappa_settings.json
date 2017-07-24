@@ -1,0 +1,8 @@
+{
+    "production": {
+        "app_function": "namegenserver.app",
+        "aws_region": "eu-west-1",
+        "profile_name": "sillynamegenerator",
+        "s3_bucket": "sillynamegenerator"
+    }
+}
