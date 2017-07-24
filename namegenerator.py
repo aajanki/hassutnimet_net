@@ -3,6 +3,7 @@
 
 import csv
 import random
+import os.path
 
 
 word_start = '^'
@@ -14,6 +15,27 @@ class Markov(object):
         self.n = n
         self.statistics = statistics
         self.forbidden = forbidden
+
+
+class NameGenerator(object):
+    def __init__(self, datadir):
+        self.male_chain = collect_statistics(read_data(os.path.join(datadir, 'first-names-male.csv')), 4)
+        self.female_chain = collect_statistics(read_data(os.path.join(datadir, 'first-names-female.csv')), 4)
+        self.last_chain = collect_statistics(read_data(os.path.join(datadir, 'last-names.csv')), 5)
+
+    def generate(self):
+        generate_male = random.random() < 0.5
+        first_chain = self.male_chain if generate_male else self.female_chain
+
+        return self.sample_name(first_chain, self.last_chain)
+
+    def sample_name(self, first_chain, last_chain):
+        num_first_names = random.choices([1, 2, 3], cum_weights=[60, 90, 100])[0]
+        names = []
+        for _ in range(num_first_names):
+            names.append(markov_sample_forbidden(first_chain))
+        names.append(markov_sample_forbidden(last_chain))
+        return ' '.join(names)
 
 
 def ngrams(n, word):
@@ -65,20 +87,12 @@ def markov_sample(markov):
         
     return ''.join(sample)
 
+
 def markov_sample_forbidden(markov):
     while True:
         sample = markov_sample(markov)
         if sample not in markov.forbidden:
             return sample
-
-
-def sample_name(first_chain, last_chain):
-    num_first_names = random.choices([1, 2, 3], cum_weights=[60, 90, 100])[0]
-    names = []
-    for _ in range(num_first_names):
-        names.append(markov_sample_forbidden(first_chain))
-    names.append(markov_sample_forbidden(last_chain))
-    return ' '.join(names)
 
 
 def read_data(csvfilename):
@@ -89,13 +103,10 @@ def read_data(csvfilename):
 
 
 def main():
-    male_chain = collect_statistics(read_data('data/first-names-male.csv'), 4)
-    female_chain = collect_statistics(read_data('data/first-names-female.csv'), 4)
-    last_chain = collect_statistics(read_data('data/last-names.csv'), 5)
+    generator = NameGenerator('data')
 
-    for i in range(20):
-        first_chain = male_chain if i % 2 == 0 else female_chain
-        print(sample_name(first_chain, last_chain))
+    for _ in range(20):
+        print(generator.generate())
 
 
 if __name__ == '__main__':
