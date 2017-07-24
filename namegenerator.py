@@ -33,7 +33,9 @@ class NameGenerator(object):
         num_first_names = random.choices([1, 2, 3], cum_weights=[60, 90, 100])[0]
         names = []
         for _ in range(num_first_names):
-            names.append(markov_sample_forbidden(first_chain))
+            name = markov_sample_forbidden(first_chain)
+            if name not in names:
+                names.append(name)
         names.append(markov_sample_forbidden(last_chain))
         return ' '.join(names)
 
