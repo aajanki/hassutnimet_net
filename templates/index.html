@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Nimigeneraattori</title>
+    <style type="text/css">
+      body {
+          background-color: lightskyblue;
+      }
+      #main {
+          background-color: beige;
+          width: 500px;
+          border: 4px solid #c0c0c0;
+          margin: 0 auto;
+          margin-top: 10%;
+          text-align: center;
+      }
+      #name {
+          font-size: 24px;
+      }
+      #refresh-btn {
+          font-size: 16px;
+      }
+    </style>
 </head>
 <body>
-<h2 id="name">{{ name }}</h2>
-<button onclick="window.location.reload(true);">Arvo uusi nimi</button>
+  <div id="main">
+    <p id="name">{{ name }}</p>
+    <p><button id="refresh-btn" onclick="window.location.reload(true);">Uusi nimiehdotus</button></p>
+  </div>
 </body>
 </html>
