@@ -29,6 +29,12 @@ class NameGenerator(object):
 
         return self.sample_name(first_chain, self.last_chain)
 
+    def generate_male(self):
+        return self.sample_name(self.male_chain, self.last_chain)
+
+    def generate_female(self):
+        return self.sample_name(self.female_chain, self.last_chain)
+
     def sample_name(self, first_chain, last_chain):
         num_first_names = random.choices([1, 2, 3], cum_weights=[60, 90, 100])[0]
         names = []

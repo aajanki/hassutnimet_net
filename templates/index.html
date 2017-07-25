@@ -2,7 +2,7 @@
 <html lang="fi">
 <head>
     <meta charset="UTF-8">
-    <title>Nimigeneraattori</title>
+    <title>Hassu nimikone</title>
     <style type="text/css">
       body {
           background-color: lightskyblue;
@@ -34,11 +34,36 @@
           text-decoration: underline;
       }
     </style>
+
+    <script type="text/javascript">
+        function updateName(response) {
+            var nameElem = document.getElementById("name");
+            if (nameElem) {
+                nameElem.textContent = response.name;
+            }
+        }
+
+        function generateName(male) {
+            var apiGender = male ? "male" : "female";
+            var apiUrl = "/api/generate/" + apiGender;
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
+                    updateName(JSON.parse(req.responseText));
+                }
+            };
+            req.open("GET", apiUrl);
+            req.send();
+        }
+    </script>
 </head>
 <body>
   <div id="main">
     <p id="name">{{ name }}</p>
-    <p><button id="refresh-btn" onclick="window.location.reload(true);">Uusi nimiehdotus</button></p>
+    <p>
+        <button id="male-btn" onclick="generateName(true);">Uusi miehen nimi</button>&emsp;&emsp;
+        <button id="female-btn" onclick="generateName(false);">Uusi naisen nimi</button>
+    </p>
   </div>
   <div id="footer">
     <a href="mailto:antti.ajanki@iki.fi">Palaute</a>
