@@ -3,6 +3,7 @@ from flask.json import jsonify
 from namegenerator import NameGenerator
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 generator = NameGenerator('data')
 
 
