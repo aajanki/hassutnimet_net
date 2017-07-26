@@ -45,7 +45,7 @@
 
         function generateName(male) {
             var apiGender = male ? "male" : "female";
-            var apiUrl = "/api/generate/" + apiGender;
+            var apiUrl = "api/generate/" + apiGender;
             var req = new XMLHttpRequest();
             req.onreadystatechange = function () {
                 if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
