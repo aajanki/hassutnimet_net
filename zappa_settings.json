@@ -1,8 +1,13 @@
 {
     "production": {
+        "project_name": "nimigeneraattor",
         "app_function": "namegenserver.app",
         "aws_region": "eu-west-1",
         "profile_name": "sillynamegenerator",
-        "s3_bucket": "sillynamegenerator"
+        "s3_bucket": "sillynamegenerator",
+        "keep_warm": false,
+        "memory_size": 256,
+        "domain": "hassutnimet.net",
+        "certificate_arn": "arn:aws:acm:us-east-1:246999467080:certificate/10920cf8-ca9b-4510-bfca-b5a803683a37"
     }
 }
