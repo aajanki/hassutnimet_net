@@ -18,9 +18,6 @@
       #name {
           font-size: 24px;
       }
-      #refresh-btn {
-          font-size: 16px;
-      }
       #footer {
           text-align: center;
       }
@@ -32,6 +29,9 @@
       }
       #footer a:hover {
           text-decoration: underline;
+      }
+      .refresh-container {
+          margin: 1em 0;
       }
     </style>
 
@@ -54,16 +54,19 @@
             };
             req.open("GET", apiUrl);
             req.send();
+
+            return false;
         }
     </script>
 </head>
 <body>
   <div id="main">
     <p id="name">{{ name }}</p>
-    <p>
-        <button id="male-btn" onclick="generateName(true);">Uusi miehen nimi</button>&emsp;&emsp;
-        <button id="female-btn" onclick="generateName(false);">Uusi naisen nimi</button>
-    </p>
+    <form method="GET" action="" class="refresh-container">
+      <input type="submit" onclick="return generateName(true);" value="Uusi miehen nimi">
+      &emsp;&emsp;
+      <input type="submit" onclick="return generateName(false);" value="Uusi naisen nimi">
+    </form>
   </div>
   <div id="footer">
     <a href="mailto:antti.ajanki@iki.fi">Palaute</a>
