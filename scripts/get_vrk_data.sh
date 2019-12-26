@@ -1,17 +1,17 @@
 #!/bin/sh
 
-if [ ! -f data/raw/Etunimitilasto-2017-04-06-VRK.xls ]; then
-   wget https://www.avoindata.fi/dataset/57282ad6-3ab1-48fb-983a-8aba5ff8d29a/resource/1db08a34-8948-48bc-89a6-0a95fdfa4a76/download/Etunimitilasto-2017-04-06-VRK.xls -O data/raw/Etunimitilasto-2017-04-06-VRK.xls
+if [ ! -f data/raw/etunimitilasto-2019-08-07-vrk.xlsx ]; then
+   mkdir -p data/raw && wget https://www.avoindata.fi/data/dataset/57282ad6-3ab1-48fb-983a-8aba5ff8d29a/resource/46f4f0b1-dc1f-4c28-a23b-2fba6cfa19b4/download/etunimitilasto-2019-08-07-vrk.xlsx -O data/raw/etunimitilasto-2019-08-07-vrk.xlsx
 fi
 if [ ! -f data/raw/Sukunimitilasto-2017-04-06-VRK.xls ]; then
-   wget https://www.avoindata.fi/dataset/57282ad6-3ab1-48fb-983a-8aba5ff8d29a/resource/af5b50bf-094e-41a5-bdde-80f5c4e11620/download/Sukunimitilasto-2017-04-06-VRK.xls -O data/raw/Sukunimitilasto-2017-04-06-VRK.xls
+   wget https://www.avoindata.fi/data/dataset/57282ad6-3ab1-48fb-983a-8aba5ff8d29a/resource/a32aa571-23aa-4bfc-ba72-106f74c5252e/download/sukunimitilasto-2019-08-07-vrk.xlsx -O data/raw/sukunimitilasto-2019-08-07-vrk.xlsx
 fi
 
 echo "Name,Count" > data/first-names-male.csv
-in2csv --sheet "Miehet kaikki" data/raw/Etunimitilasto-2017-04-06-VRK.xls | tail -n +2 >> data/first-names-male.csv
+in2csv --sheet "Miehet kaikki" data/raw/etunimitilasto-2019-08-07-vrk.xlsx | tail -n +2 >> data/first-names-male.csv
 
 echo "Name,Count" > data/first-names-female.csv
-in2csv --sheet "Naiset kaikki" data/raw/Etunimitilasto-2017-04-06-VRK.xls | tail -n +2 >> data/first-names-female.csv
+in2csv --sheet "Naiset kaikki" data/raw/etunimitilasto-2019-08-07-vrk.xlsx | tail -n +2 >> data/first-names-female.csv
 
 echo "Name,Count" > data/last-names.csv
-in2csv --sheet "Nimet" data/raw/Sukunimitilasto-2017-04-06-VRK.xls | tail -n +2 >> data/last-names.csv
+in2csv --sheet "Sukunimet" data/raw/sukunimitilasto-2019-08-07-vrk.xlsx | tail -n +2 >> data/last-names.csv
