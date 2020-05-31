@@ -19,7 +19,7 @@ Requires Python 3.6.
 ### 1. Setup a Python virtual environment with the required libraries
 
 ```
-virtualenv -p python3.6 venv
+python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -45,4 +45,10 @@ Open [http://localhost:5000](http://localhost:5000) on a web browser.
 Alternatively, run the command line script that prints a bunch of random names:
 ```
 python namegenerator.py
+```
+
+## Deployment
+
+```
+zappa update
 ```

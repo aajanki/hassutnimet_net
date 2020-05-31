@@ -8,6 +8,6 @@
         "keep_warm": false,
         "memory_size": 256,
         "domain": "hassutnimet.net",
-        "certificate_arn": "arn:aws:acm:us-east-1:246999467080:certificate/10920cf8-ca9b-4510-bfca-b5a803683a37"
+        "certificate_arn": "arn:aws:acm:us-east-1:246999467080:certificate/da2db46e-cac1-4fbc-aa1a-7b373436d1dc"
     }
 }
