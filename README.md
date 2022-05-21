@@ -14,13 +14,14 @@ Some examples of the generated names:
 
 ## Usage
 
-Requires Python 3.6.
+Requires Python 3.9.
 
 ### 1. Setup a Python virtual environment with the required libraries
 
 ```
-python -m venv venv
+python3.9 -m venv venv
 source venv/bin/activate
+pip install wheel
 pip install -r requirements.txt
 ```
 
